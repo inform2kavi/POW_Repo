@@ -1,0 +1,27 @@
+1.This Class should have constructor that should take driver as paramater
+	public void POC_Admin_ItemManagement(WebDriver driver)
+	{
+	}
+	
+2.This class should have following Locators as private global variables
+	private By Home 
+	private By addVendor(ADD ITEM)  
+	private By form(at the side of each row for editing the row) 
+	private By listPagination(pagenumber at the bottom)
+	
+3.This class should have following Mehtods
+	a. public void clickHome()
+	{
+	}
+	
+	b.public void clickaddItem()
+	{
+	}
+	
+	c.public void clickEditItem()
+	{
+	}
+	
+	d.public void ClickNavigatePage()
+	{
+	}

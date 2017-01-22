@@ -1,0 +1,19 @@
+1. This class should have the constructor that takes driver as input 
+	public LoginPageObject(WedDriver driver)
+2. Should have following Locators as private global varibles
+	By email, By password, By loginbutton
+3. It should contain following methods
+	a.public void EnterUsername(String uname)
+		{
+		}
+		
+	b.public void EnterPassword(String pwd)
+		{
+		}
+		
+	c.public void ClickLogin()
+		{
+		}
+		
+		
+
