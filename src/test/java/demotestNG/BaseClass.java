@@ -7,46 +7,58 @@ import java.io.StringWriter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import utils.CaptureScreenShot;
+import utils.DriverClass;
 import utils.ReadProperties;
 
 public class BaseClass {
 	
-	WebDriver driver;
+	//Declaring global variables
+	WebDriver driver=null;
 	ExtentReports report = null;
 	ExtentTest logger = null;
 	ReadProperties ReadProp;
 	
-	
-	public void BaseClass_BeforeClass(String ClassName) throws IOException
+	//General before class method 
+	@BeforeClass
+	public void BaseClass_BeforeClass() throws IOException
 	{
+		
+		//Instantiating object for reading property file
 		ReadProp = new ReadProperties();
-		System.setProperty(ReadProp.ReturnPropertyValue("chromedriver", 0),ReadProp.ReturnPropertyValue("chromedriver", 1));	
-		driver = new ChromeDriver();		
-		report = new ExtentReports("./Reports/"+ClassName+".html");	
-		ExtentTest logger = null;
+		
+		//Setting system property for chrome driver
+		DriverClass DriverClassObj = new DriverClass();
+		driver = DriverClassObj.InitDriver(driver, ReadProp.ReturnPropertyValue("chromedriver", 0), ReadProp.ReturnPropertyValue("chromedriver", 1));
+			
+		//Instantiating Reports object with the class namein the path
+		report = new ExtentReports("./Reports/"+this.getClass().getSimpleName()+".html");	
+		
 		
 	}	
 	
-	public void BaseClass_BeforeMethod()
-	{
-		
-	}
 	
+	@AfterMethod
 	public void BaseClass_AfterMethod(ITestResult result) throws IOException
 	{
+		//Pass test actions
 		if(result.isSuccess())
 		{
 			logger.log(LogStatus.PASS, result.getName()+" passed");
 		}
 		
+		//Fail test actions
 		else
 		{
+			
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			result.getThrowable().printStackTrace(pw);
@@ -59,7 +71,8 @@ public class BaseClass {
 		report.flush();
 		
 	}
-	
+
+	@AfterClass
 	public void BaseClass_AfterClass()
 	{
 		driver.close();
