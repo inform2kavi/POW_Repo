@@ -9,13 +9,13 @@ public class ReadProperties {
 	
 	public ReadProperties() throws IOException
 	{
-		System.out.println("Loading constructor of ReadProperties");
+		
 		FileInputStream FIS = new FileInputStream("./Resources/config.properties");
 		propobj.load(FIS);
 		
 	}
 	
-	
+	//returns the value of the key
 	public String ReturnPropertyValue(String Key)
 	{
 		
@@ -24,6 +24,7 @@ public class ReadProperties {
 		
 	}
 	
+	//returns the specified index value of the key 
 	public String ReturnPropertyValue(String Key, int fieldno)
 	{
 		return propobj.getProperty(Key).split(":")[fieldno];
