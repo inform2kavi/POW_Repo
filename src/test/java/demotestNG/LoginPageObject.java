@@ -98,7 +98,7 @@ public class LoginPageObject {
 		return flag;
 	}
 	
-	//Method to verify valid login by checking the presence of particular message from excel int he pagesource
+	//Method to verify valid login by checking the presence of particular message from excel in the page source
 	public boolean CheckAllLogin(String Message) throws IOException
 	{
 		boolean flag = false;
